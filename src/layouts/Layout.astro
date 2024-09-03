@@ -1,4 +1,6 @@
 ---
+import "../styles/base.css";
+
 interface Props {
 	title: string;
 }
@@ -18,44 +20,44 @@ const { title } = Astro.props;
 
 		<!-- media and SEO meta tags -->
 		<meta name="author" content="ssanjua" />
-    <meta name="description" content="ethical hacking write ups machines hack the box try hack me vulnhub" />
-    <meta property="og:title" content="ssanjua blog | ethical hacking write ups" />
-    <meta property="og:description" content="ethical hacking write ups machines hack the box try hack me vulnhub resolution maquinas resolucion" />
-    <meta property="og:image" content="/some-image.png" />
-    <meta property="og:url" content="/this-page.html" />
-    <meta property="og:site_name" content="og_site_name" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image:alt" content="twitter_image_description" />
+		<meta
+			name="description"
+			content="ethical hacking write ups machines hack the box try hack me vulnhub"
+		/>
+		<meta
+			property="og:title"
+			content="ssanjua blog | ethical hacking write ups"
+		/>
+		<meta
+			property="og:description"
+			content="ethical hacking write ups machines hack the box try hack me vulnhub resolution maquinas resolucion"
+		/>
+		<meta property="og:image" content="/some-image.png" />
+		<meta property="og:url" content="/this-page.html" />
+		<meta property="og:site_name" content="og_site_name" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image:alt" content="twitter_image_description" />
+
+		<!-- Google Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Martian+Mono:wght@100..800&display=swap"
+			rel="stylesheet"
+		/>
+
+		<script is:inline>
+      const currentTheme = localStorage.getItem("theme");
+      const theme = currentTheme === "dark" ? "theme-dark" : "";
+      document.querySelector("html").className = theme;
+    </script>
+
 	</head>
-	<body>
+	<body class="font-mono bg-skin-fill text-skin-base">
 		<slot />
 	</body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
