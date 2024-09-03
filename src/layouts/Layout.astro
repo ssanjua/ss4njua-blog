@@ -15,6 +15,17 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- media and SEO meta tags -->
+		<meta name="author" content="ssanjua" />
+    <meta name="description" content="ethical hacking write ups machines hack the box try hack me vulnhub" />
+    <meta property="og:title" content="ssanjua blog | ethical hacking write ups" />
+    <meta property="og:description" content="ethical hacking write ups machines hack the box try hack me vulnhub resolution maquinas resolucion" />
+    <meta property="og:image" content="/some-image.png" />
+    <meta property="og:url" content="/this-page.html" />
+    <meta property="og:site_name" content="og_site_name" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image:alt" content="twitter_image_description" />
 	</head>
 	<body>
 		<slot />
