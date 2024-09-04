@@ -29,14 +29,14 @@ const { href, post, secHeading = true } = Astro.props;
 
 <style>
   li {
-    @apply mt-6;
+    @apply my-4;
   }
   a {
     @apply text-skin-accent font-medium text-lg;
   }
   a h2,
   a h3 {
-    @apply font-medium text-lg;
+    @apply font-medium text-lg hover:text-skin-base hover:underline underline-offset-4;
   }
   .tags-wrapper {
     @apply flex gap-2 py-2;
