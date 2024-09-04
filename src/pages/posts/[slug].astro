@@ -3,7 +3,7 @@ import Header from "@components/Header.astro";
 import Layout from "@layouts/Layout.astro";
 import Datetime from "@components/Datetime.astro";
 import type { MarkdownInstance } from "astro";
-import type { Frontmatter } from "src/utils/types";
+import type { Frontmatter } from "@utils/types";
 import Tag from "@components/Tag.astro";
 import Footer from "@components/Footer.astro";
 
@@ -11,6 +11,7 @@ import Footer from "@components/Footer.astro";
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
 }
+
 export async function getStaticPaths() {
   const posts = await Astro.glob("../../contents/*.md");
   return posts.map((post: any) => {
@@ -30,7 +31,7 @@ const { Content, frontmatter } = Astro.props.post;
 
 <Layout title={frontmatter.title}>
   <Header />
-  <main>
+  <main id="main-content">
     <h1 class="post-title">{frontmatter.title}</h1>
     <Datetime datetime={frontmatter.datetime} size="sm" className="my-4" />
     <ul class="tags-container">
@@ -49,7 +50,7 @@ const { Content, frontmatter } = Astro.props.post;
 
 <style>
   main {
-    @apply max-w-3xl mx-auto px-4 py-12;
+    @apply max-w-3xl mx-auto px-4 py-12 w-full;
   }
   .post-title {
     @apply font-semibold text-2xl text-skin-accent;

@@ -2,10 +2,20 @@
 import "../styles/base.css";
 
 interface Props {
-	title: string;
+	title?: string;
+  author?: string;
+  description?: string;
+  ogImage?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title = import.meta.env.PUBLIC_SITE_TITLE,
+  author = import.meta.env.PUBLIC_AUTHOR,
+  description = import.meta.env.PUBLIC_SITE_DESC,
+  ogImage = import.meta.env.PUBLIC_OG_IMAGE,
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(ogImage, Astro.url);
 ---
 
 <!doctype html>
@@ -14,29 +24,29 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="canonical" href={canonicalURL} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
 
-		<!-- media and SEO meta tags -->
-		<meta name="author" content="ssanjua" />
-		<meta
-			name="description"
-			content="ethical hacking write ups machines hack the box try hack me vulnhub"
-		/>
-		<meta
-			property="og:title"
-			content="ssanjua blog | ethical hacking write ups"
-		/>
-		<meta
-			property="og:description"
-			content="ethical hacking write ups machines hack the box try hack me vulnhub resolution maquinas resolucion"
-		/>
-		<meta property="og:image" content="/some-image.png" />
-		<meta property="og:url" content="/this-page.html" />
-		<meta property="og:site_name" content="og_site_name" />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:image:alt" content="twitter_image_description" />
+		<!-- General Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImageURL} />
+
+		 <!-- Twitter -->
+		 <meta property="twitter:card" content="summary_large_image" />
+		 <meta property="twitter:url" content={canonicalURL} />
+		 <meta property="twitter:title" content={title} />
+		 <meta property="twitter:description" content={description} />
+		 <meta property="twitter:image" content={socialImageURL} />
+
 
 		<!-- Google Font -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,9 +65,8 @@ const { title } = Astro.props;
       const theme = currentTheme === "dark" ? "theme-dark" : "";
       document.querySelector("html").className = theme;
     </script>
-
 	</head>
-	<body class="font-mono bg-skin-fill text-skin-base">
+	<body>
 		<slot />
 	</body>
 </html>

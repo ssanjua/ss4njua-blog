@@ -1,6 +1,6 @@
 ---
 import Datetime from "./Datetime.astro";
-import type { Frontmatter } from "src/utils/types";
+import type { Frontmatter } from "@utils/types";
 
 export interface Props {
   href?: string;
@@ -34,7 +34,7 @@ const { href, post, secHeading = true } = Astro.props;
   }
   a h2,
   a h3 {
-    @apply font-medium text-lg hover:text-skin-base hover:underline underline-offset-4;
+    @apply font-medium text-lg hover:text-skin-base;
   }
   .tags-wrapper {
     @apply flex gap-2 py-2;

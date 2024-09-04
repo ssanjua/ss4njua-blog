@@ -1,5 +1,9 @@
+---
+import HR from "./HR.astro";
+---
+
 <footer>
-  <hr class="border-skin-line" />
+  <HR noPadding />
   <div class="footer-wrapper">
     <div class="social-icons">
       <button>
@@ -44,6 +48,9 @@
 </footer>
 
 <style>
+  footer {
+    @apply mt-auto w-full;
+  }
   .footer-wrapper {
     @apply py-6 sm:py-4 flex text-xs flex-col sm:flex-row-reverse justify-between items-center;
   }

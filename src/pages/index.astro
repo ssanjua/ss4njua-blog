@@ -6,7 +6,7 @@ import Footer from "@components/Footer.astro";
 import LinkButton from "../components/LinkButton.astro";
 import HR from "@components/HR.astro";
 
-import type { Frontmatter } from "src/utils/types";
+import type { Frontmatter } from "@utils/types";
 const posts = await Astro.glob<Frontmatter>("../contents/*.md");
 
 const sortedPosts = posts.sort(
@@ -18,7 +18,7 @@ const sortedPosts = posts.sort(
 
 <Layout title="ssanjua blog">
 	<Header activeNav="tags"/>
-	<main>
+	<main id="main-content">
 		<section id="hero">
 			<div class="hero-container">
 				<div class="ascii-art">
@@ -97,7 +97,7 @@ x;:;;X$&&&&&&&&&&$x;
 					</LinkButton>
 				</div>
 			</div>
-			<HR />
+			<HR noPadding />
 		</section>
 		<section id="featured">
 			<h2>Featured</h2>
@@ -115,7 +115,7 @@ x;:;;X$&&&&&&&&&&$x;
 					)
 				}
 			</ul>
-			<HR />
+			<HR noPadding />
 		</section>
 		<section id="recent">
 			<h2>Recent</h2>

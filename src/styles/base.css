@@ -36,7 +36,6 @@
     display: block;
   }
 }
-
 @layer components {
   .display-none {
     @apply hidden;
@@ -49,9 +48,21 @@
     @apply w-6 h-6 inline-block fill-skin-base group-hover:fill-skin-accent;
   }
   .prose {
-    @apply prose-a:underline-offset-8 prose-a:!decoration-dashed hover:prose-a:!decoration-solid;
+    @apply prose-a:underline-offset-8 prose-li:overflow-x-clip prose-a:!decoration-dashed hover:prose-a:text-skin-accent prose-img:mx-auto;
   }
   .theme-dark .prose {
     @apply prose-invert;
   } 
+  .noPadding {
+    @apply px-0;
+  }
+  body {
+    @apply font-mono bg-skin-fill text-skin-base min-h-screen flex flex-col;
+  }
+  a {
+    @apply outline-offset-1 outline-skin-fill outline-2 focus-visible:outline-dashed focus-visible:no-underline;
+  }
+  .focus-outline {
+    @apply outline-offset-1 outline-skin-fill outline-2 focus-visible:outline-dashed focus-visible:no-underline;
+  }
 }

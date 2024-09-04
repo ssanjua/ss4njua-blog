@@ -1,0 +1,53 @@
+---
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import Footer from "@components/Footer.astro";
+import getPostsByTag from "@utils/getPostsByTag";
+import getUniqueTags from "@utils/getUniqueTags";
+import Card from "@components/Card.astro";
+import type { MarkdownInstance } from "astro";
+import type { Frontmatter } from "@utils/types";
+
+export interface Props {
+  tag: string;
+  posts: MarkdownInstance<Frontmatter>;
+}
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../../contents/*.md");
+  const tags = getUniqueTags(posts);
+  return tags.map((tag: any) => {
+    return {
+      params: {
+        tag,
+      },
+      props: {
+        tag,
+      },
+    };
+  });
+}
+
+const { tag } = Astro.params as Props;
+const posts = await Astro.glob<Frontmatter>("../../contents/*.md");
+const tagPosts = getPostsByTag(posts, tag);
+---
+
+<Layout title="tags - ssanjuablog">
+  <Header activeNav="tags" />
+  <Main
+    pageTitle={`Tag:${tag}`}
+    pageDesc={`All the including "${tag}".`}
+  >
+    <ul>
+      {
+        tagPosts.map(({ frontmatter }) => (
+          <Card href={`/posts/${frontmatter.slug}`} post={frontmatter} />
+        ))
+      }
+    </ul>
+  </Main>
+  <Footer />
+</Layout>
+

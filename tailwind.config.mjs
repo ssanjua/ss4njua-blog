@@ -25,6 +25,7 @@ export default {
 					card: withOpacity("--color-card"),
 					accent: withOpacity("--color-accent"),
 					"card-muted": withOpacity("--color-card-muted"),
+					inverted: withOpacity("--color-text-base"),
 				},
 			},
 			fontFamily: {
@@ -47,6 +48,11 @@ export default {
 					accent: withOpacity("--color-text-accent"),
 				},
 			},
+			outlineColor: {
+        skin: {
+          fill: withOpacity("--color-accent"),
+        },
+      },
 		},
 	},
 	plugins: [require("@tailwindcss/typography")],
