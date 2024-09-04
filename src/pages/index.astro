@@ -4,17 +4,10 @@ import Header from "../components/Header.astro";
 import Card from "../components/Card.astro";
 import Footer from "@components/Footer.astro";
 import LinkButton from "../components/LinkButton.astro";
+import HR from "@components/HR.astro";
 
-export interface Frontmatter {
-	title: string;
-	description: string;
-	author: string;
-	datetime: string;
-	slug: string;
-	featured: boolean;
-	tags: string[];
-}
-const posts = await Astro.glob<Frontmatter>("../pages/posts/*.md");
+import type { Frontmatter } from "src/utils/types";
+const posts = await Astro.glob<Frontmatter>("../contents/*.md");
 
 const sortedPosts = posts.sort(
 	(a, b) =>
@@ -24,9 +17,9 @@ const sortedPosts = posts.sort(
 ---
 
 <Layout title="ssanjua blog">
-	<Header />
+	<Header activeNav="tags"/>
 	<main>
-		<section id="hero-section">
+		<section id="hero">
 			<div class="hero-container">
 				<div class="ascii-art">
 					{
@@ -104,36 +97,36 @@ x;:;;X$&&&&&&&&&&$x;
 					</LinkButton>
 				</div>
 			</div>
-			<hr />
+			<HR />
 		</section>
-		<section id="featured-section">
+		<section id="featured">
 			<h2>Featured</h2>
 			<ul>
 				{
 					posts.map(
-						(post) =>
-							post.frontmatter.featured && (
+						({frontmatter}) =>
+							frontmatter.featured && (
 								<Card
-									href={post.url}
-									post={post.frontmatter}
+									href={`/posts/${frontmatter.slug}`}
+									post={frontmatter}
 									secHeading={false}
 								/>
 							),
 					)
 				}
 			</ul>
-			<hr />
+			<HR />
 		</section>
-		<section id="recent-section">
+		<section id="recent">
 			<h2>Recent</h2>
 			<ul>
 				{
 					sortedPosts.map(
-						(post, index) =>
+						({frontmatter}, index) =>
 							index < 4 && (
 								<Card
-									href={post.url}
-									post={post.frontmatter}
+									href={`/posts/${frontmatter.slug}`}
+									post={frontmatter}
 									secHeading={false}
 								/>
 							),
@@ -161,10 +154,10 @@ x;:;;X$&&&&&&&&&&$x;
 	hr {
 		@apply border-skin-accent opacity-50 mx-4 max-w-5xl sm:mx-auto;
 	}
-	#hero-section {
+	#hero {
 		@apply pt-12;
 	}
-	#hero-section h1 {
+	#hero h1 {
 		@apply font-bold my-1 text-3xl sm:text-3xl mt-4;
 	}
 	h1 span {
@@ -194,12 +187,12 @@ x;:;;X$&&&&&&&&&&$x;
 	.hero-container {
 		@apply flex gap-4;
 	}
-	#featured-section,
-	#recent-section {
+	#featured,
+	#recent {
 		@apply py-6;
 	}
-	#featured-section h2,
-	#recent-section h2 {
+	#featured h2,
+	#recent h2 {
 		@apply font-semibold text-2xl tracking-wide;
 	}
 	.all-posts-btn-wrapper {

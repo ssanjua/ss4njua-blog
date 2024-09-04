@@ -1,0 +1,60 @@
+---
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import Datetime from "@components/Datetime.astro";
+import type { MarkdownInstance } from "astro";
+import type { Frontmatter } from "src/utils/types";
+import Tag from "@components/Tag.astro";
+import Footer from "@components/Footer.astro";
+
+
+export interface Props {
+  post: MarkdownInstance<Frontmatter>;
+}
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../../contents/*.md");
+  return posts.map((post: any) => {
+    return {
+      params: {
+        slug: post.frontmatter.slug,
+      },
+      props: {
+        post,
+        frontmatter: post.frontmatter,
+      },
+    };
+  });
+}
+const { Content, frontmatter } = Astro.props.post;
+---
+
+<Layout title={frontmatter.title}>
+  <Header />
+  <main>
+    <h1 class="post-title">{frontmatter.title}</h1>
+    <Datetime datetime={frontmatter.datetime} size="sm" className="my-4" />
+    <ul class="tags-container">
+      {frontmatter.tags.map((tag: string) => <Tag name={tag} />)}
+    </ul>
+    <article
+      id="article"
+      role="article"
+      class="mx-auto max-w-3xl prose prose-slate"
+    >
+      <Content />
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    @apply max-w-3xl mx-auto px-4 py-12;
+  }
+  .post-title {
+    @apply font-semibold text-2xl text-skin-accent;
+  }
+  .tags-container {
+    @apply mb-8;
+  }
+</style>

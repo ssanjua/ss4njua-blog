@@ -1,0 +1,27 @@
+---
+import formatDatetime from "src/utils/formatDatetime";
+export interface Props {
+  datetime: string;
+  size?: "sm" | "lg";
+  className?: string;
+}
+const { datetime, size = "sm", className } = Astro.props;
+---
+
+<div class={`date-time-wrapper ${className}`}>
+  <span class={`italic ${size === "sm" ? "text-sm" : "text-base"}`}
+    >{formatDatetime(datetime)}
+  </span>
+</div>
+
+<style>
+  .date-time-wrapper {
+    @apply opacity-80 my-1 flex items-center space-x-2;
+  }
+  .date-time {
+    @apply italic text-xs;
+  }
+  svg {
+    @apply w-6 h-6 inline-block fill-skin-base;
+  }
+</style>

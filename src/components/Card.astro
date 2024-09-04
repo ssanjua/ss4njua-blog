@@ -1,6 +1,6 @@
 ---
-import formatDatetime from "src/utils/formatDatetime";
-import type { Frontmatter } from "src/pages/index.astro";
+import Datetime from "./Datetime.astro";
+import type { Frontmatter } from "src/utils/types";
 
 export interface Props {
   href?: string;
@@ -19,9 +19,7 @@ const { href, post, secHeading = true } = Astro.props;
       <p>{tag}</p>
     ))}
   </div>
-  <div class="date-time-wrapper">
-    <span class="date-time">{formatDatetime(post.datetime)}</span>
-  </div>
+  <Datetime datetime={post.datetime} />
   <p>
     {post.description}
   </p>

@@ -24,6 +24,7 @@ export default {
 					fill: withOpacity("--color-fill"),
 					card: withOpacity("--color-card"),
 					accent: withOpacity("--color-accent"),
+					"card-muted": withOpacity("--color-card-muted"),
 				},
 			},
 			fontFamily: {
@@ -48,5 +49,5 @@ export default {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/typography")],
 };

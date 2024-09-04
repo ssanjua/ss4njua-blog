@@ -1,0 +1,10 @@
+---
+export interface Props {
+  className?: string;
+}
+const { className } = Astro.props;
+---
+
+<div class={`max-w-4xl mx-auto  ${className}`}>
+  <hr class="border-skin-accent" />
+</div>

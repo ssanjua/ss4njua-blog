@@ -1,3 +1,12 @@
+---
+import HR from './HR.astro';
+
+export interface Props {
+  activeNav?: "cheatsheets" | "posts" | "tags" | "about" | "writeups";
+}
+const { activeNav } = Astro.props;
+---
+
 <header>
   <div class="nav-container">
     <div class="top-nav-wrap">
@@ -10,10 +19,31 @@
     </div>
     <nav class="display-none sm:flex">
       <ul>
-        <li><a href="/cheatsheets">Cheatsheets</a></li>
-        <li><a href="/posts">Posts</a></li>
-        <li><a href="/tags">Writeups</a></li>
-        <li><a href="/about">About</a></li>
+        <li>
+          <a href="/cheatsheets" class={activeNav === "cheatsheets" ? "active" : ""}
+            >Cheats</a
+          >
+        </li>
+        <li>
+          <a href="/posts" class={activeNav === "posts" ? "active" : ""}
+            >Posts</a
+          >
+        </li>
+        <li>
+          <a href="/writeups" class={activeNav === "writeups" ? "active" : ""}
+            >Writeups</a
+          >
+        </li>
+        <li>
+          <a href="/tags" class={activeNav === "tags" ? "active" : ""}
+            >Tags</a
+          >
+        </li>
+        <li>
+          <a href="/about" class={activeNav === "about" ? "active" : ""}
+            >About</a
+          >
+        </li>
       </ul>
       <div class="button-wrapper">
         <button>
@@ -38,11 +68,11 @@
       </div>
     </nav>
   </div>
-  <hr />
+  <HR />
 </header>
 
 <style>
-  hr {
+  header hr {
     @apply border-skin-accent opacity-50 px-4 max-w-4xl sm:mx-auto;
   }
   .nav-container {
@@ -71,6 +101,9 @@
   }
   nav a {
     @apply py-2 px-2 font-medium hover:text-skin-accent;
+  }
+  nav a.active {
+    @apply border border-skin-line shadow-accent;
   }
   nav button {
     @apply p-2;

@@ -1,0 +1,28 @@
+---
+import slugify from "src/utils/slugify";
+
+export interface Props {
+  name: string;
+  size?: "sm" | "lg";
+}
+const { name, size = "sm" } = Astro.props;
+const slug = slugify(name);
+---
+
+<li class={`inline-block ${size === "sm" ? "my-1" : "my-3 mx-1"}`}>
+  <a
+    href={`/tags/${slug}`}
+    class={`${size === "sm" ? "py-1 px-2 text-xs" : "p-2 text-sm"}`}
+  >
+    <span>{name}</span>
+  </a>
+</li>
+
+<style>
+  a {
+    @apply bg-skin-card hover:bg-skin-card-muted rounded;
+  }
+  a svg {
+    @apply w-6 h-6 text-skin-base scale-75;
+  }
+</style>
