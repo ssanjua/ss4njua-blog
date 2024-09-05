@@ -1,0 +1,33 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import LinkButton from "@components/LinkButton.astro";
+---
+
+<Layout title={`404 Not Found | ${import.meta.env.PUBLIC_SITE_TITLE}`}>
+  <Header />
+
+  <main id="main-content">
+    <div class="not-found-wrapper">
+      <img src="https://http.cat/images/404.jpg" width="80%" alt="404 cat" />
+      <LinkButton
+        href="/"
+        newTab={false}
+        className="my-6 underline decoration-dashed underline-offset-8 text-lg"
+      >
+        Go back
+      </LinkButton>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  #main-content {
+    @apply max-w-4xl mx-auto flex-1 justify-center items-center flex;
+  }
+  .not-found-wrapper {
+    @apply flex flex-col items-center justify-center mb-14;
+  }
+</style>

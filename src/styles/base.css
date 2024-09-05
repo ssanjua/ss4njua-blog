@@ -35,11 +35,6 @@
   .theme-dark #sun-svg {
     display: block;
   }
-}
-@layer components {
-  .display-none {
-    @apply hidden;
-  }
   section,
   footer {
     @apply max-w-4xl mx-auto px-4;
@@ -48,7 +43,9 @@
     @apply w-6 h-6 inline-block fill-skin-base group-hover:fill-skin-accent;
   }
   .prose {
-    @apply prose-a:underline-offset-8 prose-li:overflow-x-clip prose-a:!decoration-dashed hover:prose-a:text-skin-accent prose-img:mx-auto;
+    @apply prose-a:underline-offset-8 prose-ul:overflow-x-clip 
+    prose-a:!decoration-dashed hover:prose-a:text-skin-accent 
+    prose-img:mx-auto;
   }
   .theme-dark .prose {
     @apply prose-invert;
@@ -61,6 +58,41 @@
   }
   a {
     @apply outline-offset-1 outline-skin-fill outline-2 focus-visible:outline-dashed focus-visible:no-underline;
+  }
+  #article h2#table-of-contents {
+    @apply mb-2;
+  }
+  #article h2#table-of-contents + p {
+    @apply hidden;
+  }
+  #article details {
+    @apply cursor-pointer inline-block select-none;
+  }
+  svg.icon-tabler {
+    @apply w-6 h-6 scale-125 sm:scale-110 opacity-90 
+    inline-block fill-transparent stroke-2 stroke-current 
+    group-hover:fill-transparent;
+  }
+  html {
+    overflow-y: scroll;
+  }
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-skin-fill;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-skin-card;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-skin-card-muted;
+  }
+}
+
+@layer components {
+  .display-none {
+    @apply hidden;
   }
   .focus-outline {
     @apply outline-offset-1 outline-skin-fill outline-2 focus-visible:outline-dashed focus-visible:no-underline;

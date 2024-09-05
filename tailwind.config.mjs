@@ -36,6 +36,7 @@ export default {
 				skin: {
 					line: withOpacity("--color-border"),
 					accent: withOpacity("--color-border-accent"),
+					fill: withOpacity("--color-text-base"),
 				},
 			},
 			boxShadow: {

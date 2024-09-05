@@ -1,19 +1,16 @@
 ---
-title: Testing post 
+title: My portfolio
 author: ssanjua
-datetime: 2024-07-28T16:55:12.000+00:00
+datetime: 2024-07-25T16:55:12.000+00:00
 slug: my-portfolio-and-blog
 featured: true
 tags:
   - NextJS
   - TailwindCSS
+  - HeadlessCMS
   - Blog
-  - Tag
-  - Tag22222
-  - Taging
-  - Hacker
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
+  My web portfolio.
 ---
 
 # MY PORTFOLIO 🌟

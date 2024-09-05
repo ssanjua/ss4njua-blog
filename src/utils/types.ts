@@ -6,4 +6,5 @@ export interface Frontmatter {
   slug: string;
   featured: boolean;
   tags: string[];
+  ogImage?: string;
 }

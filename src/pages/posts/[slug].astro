@@ -1,61 +1,72 @@
 ---
-import Header from "@components/Header.astro";
-import Layout from "@layouts/Layout.astro";
-import Datetime from "@components/Datetime.astro";
+
 import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "@utils/types";
-import Tag from "@components/Tag.astro";
-import Footer from "@components/Footer.astro";
-
+import Posts from "@layouts/Posts.astro";
+import PostDetails from "@layouts/PostDetails.astro";
+import getSortedPosts from "@utils/getSortedPosts";
+import getPageNumbers from "@utils/getPageNumbers";
 
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
 }
 
+type PostResult = {
+  params: {
+    slug: string | number;
+  };
+  props?: {
+    post: MarkdownInstance<Record<string, any>>;
+  };
+}[];
+type PagePaths = {
+  params: {
+    slug: string;
+  };
+}[];
+
 export async function getStaticPaths() {
   const posts = await Astro.glob("../../contents/*.md");
-  return posts.map((post: any) => {
+  let postResult: PostResult = posts.map((post) => {
     return {
       params: {
         slug: post.frontmatter.slug,
       },
       props: {
         post,
-        frontmatter: post.frontmatter,
       },
     };
   });
+
+  const pagePaths: PagePaths = getPageNumbers(posts.length).map((pageNum) => ({
+    params: { slug: String(pageNum) },
+  }));
+  return [...postResult, ...pagePaths];
 }
-const { Content, frontmatter } = Astro.props.post;
+
+const { slug } = Astro.params;
+const { post } = Astro.props;
+
+const posts = await Astro.glob<Frontmatter>("../../contents/*.md");
+const sortedPosts = getSortedPosts(posts);
+const totalPages = getPageNumbers(posts.length);
+const currentPage =
+  slug && !isNaN(Number(slug)) && totalPages.includes(Number(slug))
+    ? Number(slug)
+    : 0;
+const lastPost = currentPage * import.meta.env.PUBLIC_POST_PER_PAGE;
+const startPost = lastPost - import.meta.env.PUBLIC_POST_PER_PAGE;
+const paginatedPosts = sortedPosts.slice(startPost, lastPost);
 ---
 
-<Layout title={frontmatter.title}>
-  <Header />
-  <main id="main-content">
-    <h1 class="post-title">{frontmatter.title}</h1>
-    <Datetime datetime={frontmatter.datetime} size="sm" className="my-4" />
-    <ul class="tags-container">
-      {frontmatter.tags.map((tag: string) => <Tag name={tag} />)}
-    </ul>
-    <article
-      id="article"
-      role="article"
-      class="mx-auto max-w-3xl prose prose-slate"
-    >
-      <Content />
-    </article>
-  </main>
-  <Footer />
-</Layout>
-
-<style>
-  main {
-    @apply max-w-3xl mx-auto px-4 py-12 w-full;
-  }
-  .post-title {
-    @apply font-semibold text-2xl text-skin-accent;
-  }
-  .tags-container {
-    @apply mb-8;
-  }
-</style>
+{
+  post ? (
+    <PostDetails post={post} />
+  ) : (
+    <Posts
+      posts={paginatedPosts}
+      pageNum={currentPage}
+      totalPages={totalPages.length}
+    />
+  )
+}

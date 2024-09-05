@@ -2,11 +2,24 @@
 export interface Props {
   href: string;
   className?: string;
+  ariaLabel?: string;
+  title?: string;
+  newTab?: boolean;
+  tabindex?: string;
 }
-const { href, className } = Astro.props;
+const { href, className, ariaLabel, title, newTab = true, tabindex } = Astro.props;
 ---
 
-<a type="button" href={href} class={`group ${className}`} target="_blank">
+<a
+  type="button"
+  href={href}
+  class={`group ${className}`}
+  aria-label={ariaLabel}
+  title={title}
+  tabindex={tabindex}
+  target={newTab ? "_blank" : undefined}
+  rel={newTab ? "noopener noreferrer" : undefined}
+>
   <slot />
 </a>
 

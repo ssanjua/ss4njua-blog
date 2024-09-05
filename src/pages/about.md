@@ -5,6 +5,10 @@ title: "About"
 
 Hi, I’m a theme for Astro, an example of how you can use this starter to create a personal blog. If you want to know more about how you can customise me, add more posts, and make it your own, click on one of the social links which will take you to my repo.
 
+# something
+
++ hello
+
 Now I'm going to show you an example of an unordered list to make sure that looks good, too:
 
 - So here is the first item in this list.

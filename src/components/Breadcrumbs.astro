@@ -1,0 +1,51 @@
+---
+const currentUrlPath = Astro.url.pathname.replace(/\/+$/, "");
+const breadcrumbList = currentUrlPath.split("/").slice(1)
+
+// if breadcrumb is Home > Posts > 1 <etc>
+// replace Posts with Posts (page number)
+if (
+  (breadcrumbList[0] === "posts" && !isNaN(Number(breadcrumbList[1]))) ||
+  (breadcrumbList[0] === "posts" && breadcrumbList.length < 2)
+) {
+  breadcrumbList.splice(
+    0,
+    2,
+    `posts / page ${breadcrumbList[1] ? breadcrumbList[1] : 1}`
+  );
+}
+---
+
+<nav class="breadcrumb" aria-label="breadcrumb">
+  <ul>
+    <li><a href="/">/ ss4njua</a></li>
+    {
+      breadcrumbList.map((breadcrumb, index) => (
+        <li>
+          {index + 1 === breadcrumbList.length ? (
+            <span class={`${index > 0 ? "lowercase" : ""}`} aria-current="page">
+              {breadcrumb}
+            </span>
+          ) : (
+            <a href={`/${breadcrumb}`}>{breadcrumb}</a>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .breadcrumb {
+    @apply max-w-4xl mx-auto px-4 w-full mt-8 mb-1;
+  }
+  .breadcrumb ul li {
+    @apply inline opacity-70  text-sm;
+  }
+  .breadcrumb ul li + li {
+    @apply text-skin-base before:content-["/"];
+  }
+  .breadcrumb ul li:not(:last-child) {
+    @apply hover:opacity-100 hover:before:opacity-70;
+  }
+</style>
