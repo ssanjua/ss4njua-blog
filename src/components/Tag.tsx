@@ -1,5 +1,6 @@
 import React from 'react';
-import slugify from "../utils/slugify";
+import slugify from "@utils/slugify";
+import type { Frontmatter } from "src/types";
 
 interface TagProps {
   name: string;
@@ -7,8 +8,7 @@ interface TagProps {
 }
 
 const Tag: React.FC<TagProps> = ({ name, size = "sm" }) => {
-  const slug = slugify(name);
-  
+  const slug = slugify({ title: name } as Frontmatter);
   return (
     <li className={`inline-block mr-2 my-2 ${size === "sm" ? "my-1" : "my-3"}`}>
       <a

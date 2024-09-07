@@ -29,7 +29,7 @@ export default {
 				},
 			},
 			fontFamily: {
-				mono: ["Martian Mono", "monospace"],
+				mono: ["Source Code Pro", "monospace"],
 				inter: ["Inter", "sans-serif"],
 			},
 			borderColor: {

@@ -3,7 +3,7 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-Hi, I’m a theme for Astro, an example of how you can use this starter to create a personal blog. If you want to know more about how you can customise me, add more posts, and make it your own, click on one of the social links which will take you to my repo.
+Hi! I'm Paula, also known as ssanjua. Passionate about technology and committed to creating products that make a difference, my experience in the multimedia sector has shaped me in leadership and collaborative work. Specialized in technologies such as JavaScript, React, Node.js, and SQL/NoSQL databases, my projects include applications like Bookeando and YarcoDelivery, covering both backend and frontend. My colleagues highlight my technical skills as well as my creative thinking and problem-solving abilities.
 
 # something
 

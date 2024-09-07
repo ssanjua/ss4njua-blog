@@ -2,7 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import Tag from "@components/Tag.astro";
+import Tag from "@components/Tag";
 import Datetime from "@components/Datetime";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import type { MarkdownInstance } from "astro";
@@ -24,27 +24,31 @@ const { title, author, description, ogImage, datetime, tags } = frontmatter;
   ogImage={ogImage}
 >
   <Header />
-  <div class="max-w-4xl mx-auto w-full px-2 flex justify-start">
-    <button class="mt-8 mb-2 hover:opacity-75 flex" onclick="history.back()">
+  <div class="max-w-4xl mx-auto w-full px-2 flex items-center justify-start mb-8">
+    <button
+    class="mt-8 mb-1 hover:opacity-75 flex focus-outline"
+    onclick="history.back()"
+  >
       <svg xmlns="http://www.w3.org/2000/svg"
         ><path
           d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
         ></path>
-      </svg><span>Back</span>
+      </svg><span>back</span>
     </button>
+    <Breadcrumbs />
   </div>
-  <Breadcrumbs />
+  
   <main id="main-content">
     <h1 class="post-title">{title}</h1>
-    <p>by {author}</p>
-    <Datetime datetime={datetime} className="my-2" />
+    <h2 class="post-author">by {author}</h2>
+    <Datetime datetime={datetime} className="my-2 text-sm" />
     <ul class="tags-container">
       {tags.map((tag) => <Tag name={tag} />)}
     </ul>
     <article
       id="article"
       role="article"
-      class="mx-auto max-w-4xl mt-8 prose prose-slate"
+      class="mx-auto max-w-4xl mt-8 prose"
     >
       <Content />
     </article>
@@ -57,9 +61,12 @@ const { title, author, description, ogImage, datetime, tags } = frontmatter;
     @apply max-w-4xl mx-auto px-4 pb-12 w-full;
   }
   .post-title {
-    @apply font-semibold text-2xl text-skin-accent;
+    @apply font-bold text-2xl text-skin-accent;
   }
   .tags-container {
     @apply my-2;
+  }
+  .post-author {
+    @apply  italic;
   }
 </style>

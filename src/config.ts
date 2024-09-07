@@ -2,7 +2,7 @@ import type { SocialsObject } from "./types";
 
 export const SITE = {
   website: "https://ss4njua.vercel.app/",
-  author: "ssanjua",
+  author: "ss4njua",
   desc: "writeups and utils for pentesting and ethical hacking, machines and learning cybersecirity.",
   title: "ss4njua hacking blog ssanjua",
   ogImage: "og-default.png",
