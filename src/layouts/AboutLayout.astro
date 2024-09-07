@@ -3,6 +3,8 @@ import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
 import Layout from "./Layout.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
+import { SITE } from "src/config"
+
 export interface Props {
   frontmatter: {
     title: string;
@@ -12,7 +14,7 @@ export interface Props {
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title=`${frontmatter.title} | ${SITE.title}`>
   <Header activeNav="about" />
   <Breadcrumbs />
   <main id="main-content">

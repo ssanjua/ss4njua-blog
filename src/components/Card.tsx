@@ -1,5 +1,5 @@
 import Datetime from "./Datetime";
-import type { Frontmatter } from "@utils/types";
+import type { Frontmatter } from "src/types";
 import Tag from "./Tag";
 
 export interface Props {

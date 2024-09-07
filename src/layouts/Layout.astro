@@ -1,5 +1,6 @@
 ---
 import "../styles/base.css";
+import { SITE } from "src/config";
 
 interface Props {
 	title?: string;
@@ -9,10 +10,10 @@ interface Props {
 }
 
 const {
-  title = import.meta.env.PUBLIC_SITE_TITLE,
-  author = import.meta.env.PUBLIC_AUTHOR,
-  description = import.meta.env.PUBLIC_SITE_DESC,
-  ogImage = import.meta.env.PUBLIC_OG_IMAGE,
+  title = SITE.title,
+  author = SITE.author,
+  description = SITE.desc,
+  ogImage = SITE.ogImage,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(ogImage, Astro.url);

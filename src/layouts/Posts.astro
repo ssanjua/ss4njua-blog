@@ -5,7 +5,9 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Card from "@components/Card";
 import LinkButton from "@components/LinkButton.astro";
-import type { Frontmatter } from "@utils/types";
+import type { Frontmatter } from "src/types"
+import { SITE } from "src/config";
+
 import type { MarkdownInstance } from "astro";
 export interface Props {
   pageNum: number;
@@ -17,7 +19,7 @@ const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < totalPages ? "" : "disabled";
 ---
 
-<Layout title={`Posts | ${import.meta.env.PUBLIC_SITE_TITLE}`}>
+<Layout title={`Posts | ${SITE.title}`}>
   <Header activeNav="posts" />
   <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
     <ul>

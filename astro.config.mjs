@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
   integrations: [
     tailwind({
       config: { applyBaseStyles: false },
-    }), mdx(), react()
+    }), mdx(), react(), sitemap()
   ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],

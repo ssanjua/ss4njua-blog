@@ -1,7 +1,8 @@
 ---
 import HR from "./HR.astro";
 import LinkButton from "./LinkButton.astro";
-import socialLinks from "@utils/socialLinks";
+import socialIcons from "@assets/socialIcons";
+import { SOCIALS } from "src/config";
 ---
 
 <footer>
@@ -9,16 +10,14 @@ import socialLinks from "@utils/socialLinks";
   <div class="footer-wrapper">
     <div class="social-icons">
       {
-        socialLinks
-          .filter((socialLink) => socialLink.active)
-          .map((socialLink) => (
+         SOCIALS.filter((social) => social.active).map((social) => (
             <LinkButton
-              href={socialLink.href}
+              href={social.href}
               className="link-button"
-              title={socialLink.name}
-              ariaLabel={`${socialLink.name} icon`}
+              title={social.name}
+              ariaLabel={`${social.name} icon`}
             >
-              <Fragment set:html={socialLink.icon} />
+              <Fragment set:html={socialIcons[social.name]} />
             </LinkButton>
           ))
       }

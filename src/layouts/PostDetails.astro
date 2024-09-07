@@ -6,7 +6,7 @@ import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 import type { MarkdownInstance } from "astro";
-import type { Frontmatter } from "@utils/types";
+import type { Frontmatter } from "src/types"
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
 }
@@ -24,7 +24,7 @@ const { title, author, description, ogImage, datetime, tags } = frontmatter;
   ogImage={ogImage}
 >
   <Header />
-  <div class="max-w-3xl mx-auto w-full px-2 flex justify-start">
+  <div class="max-w-4xl mx-auto w-full px-2 flex justify-start">
     <button class="mt-8 mb-2 hover:opacity-75 flex" onclick="history.back()">
       <svg xmlns="http://www.w3.org/2000/svg"
         ><path
@@ -44,7 +44,7 @@ const { title, author, description, ogImage, datetime, tags } = frontmatter;
     <article
       id="article"
       role="article"
-      class="mx-auto max-w-3xl mt-8 prose prose-slate"
+      class="mx-auto max-w-4xl mt-8 prose prose-slate"
     >
       <Content />
     </article>

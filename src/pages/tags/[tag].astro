@@ -7,7 +7,8 @@ import getPostsByTag from "@utils/getPostsByTag";
 import getUniqueTags from "@utils/getUniqueTags";
 import Card from "@components/Card";
 import type { MarkdownInstance } from "astro";
-import type { Frontmatter } from "@utils/types";
+import type { Frontmatter } from "src/types"
+import { SITE } from "src/config"
 
 export interface Props {
   tag: string;
@@ -34,7 +35,7 @@ const posts = await Astro.glob<Frontmatter>("../../contents/*.md");
 const tagPosts = getPostsByTag(posts, tag);
 ---
 
-<Layout title="tags - ssanjuablog">
+<Layout title={`Tag:${tag} | ${SITE.title}`}>
   <Header activeNav="tags" />
   <Main
     pageTitle={`Tag:${tag}`}

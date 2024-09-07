@@ -1,6 +1,7 @@
 ---
 import HR from "./HR.astro";
 import LinkButton from "./LinkButton.astro";
+import { SITE } from "src/config"
 
 export interface Props {
   activeNav?: "cheats" | "posts" | "tags" | "about" | "writeups" | "search";
@@ -14,7 +15,7 @@ console.log({activeNav})
   <a id="skip-to-content" href="#main-content">Skip to content</a>
   <div class="nav-container">
     <div class="top-nav-wrap">
-      <a href="/" class="logo">ss4njua</a>
+      <a href="/" class="logo">{SITE.author}</a>
       <button class="hamburger-menu" aria-label="menu">
         <div class="icon-container flex">
           <div id="first-line"></div>
@@ -120,7 +121,7 @@ console.log({activeNav})
     @apply py-2 px-2 font-medium hover:text-skin-accent;
   }
   nav a.active {
-    @apply border border-skin-line shadow-accent;
+    @apply shadow-accent;
   }
   nav button {
     @apply p-2;

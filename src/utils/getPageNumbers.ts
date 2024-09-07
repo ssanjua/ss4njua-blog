@@ -1,6 +1,8 @@
+import { SITE } from "src/config"
+
 const getPageNumbers = (numberOfPosts: number) => {
   const numberOfPages =
-    numberOfPosts / Number(import.meta.env.PUBLIC_POST_PER_PAGE);
+    numberOfPosts / Number(SITE.postPerPage);
 
   let pageNumbers: number[] = [];
   for (let i = 1; i <= Math.ceil(numberOfPages); i++) {
