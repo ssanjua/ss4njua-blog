@@ -8,6 +8,7 @@ tags:
   - Vulnhub
   - Hacker
   - Easy
+  - Hack the box
 description:
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
 ---

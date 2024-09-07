@@ -13,7 +13,7 @@ import slugify from "@utils/slugify";
 
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
-  tag: string;
+  writeups: string;
 }
 
 export async function getStaticPaths() {
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
   return tags.map((tag) => {
     return {
       params: {
-        tag,
+        writeups: tag,
       },
       props: {
         tag,
@@ -35,7 +35,8 @@ export async function getStaticPaths() {
   });
 }
 
-const { tag } = Astro.props;
+const { writeups } = Astro.params; 
+const tag = writeups;
 
 const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
   "../../contents/*.md"
@@ -44,11 +45,11 @@ const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
 const tagPosts = getPostsByTag(posts, tag);
 ---
 
-<Layout title={`Tag:${tag} | ${SITE.title}`}>
+<Layout title={`${tag} machines | ${SITE.title}`}>
   <Header activeNav="tags" />
   <Main
-    pageTitle={`Tag:${tag}`}
-    pageDesc={`Posts with the tag "${tag}".`}
+    pageTitle={`Platforms: ${tag}`}
+    pageDesc={`Machines solved in "${tag}".`}
   >
     <ul>
       {

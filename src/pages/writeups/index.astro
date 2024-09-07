@@ -1,16 +1,58 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import Header from "@components/Header.astro"
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
 import Main from "@layouts/Main.astro";
 import Footer from "@components/Footer.astro";
+import Platforms from "@components/Platforms";
+import Levels from "@components/Levels";
+import getUniqueTags from "@utils/getUniqueTags";
+import type { Frontmatter } from "src/types"
+import Tag from "@components/Tag";
+
+const posts = await Astro.glob<Frontmatter>("../../contents/*.md");
+let tags = getUniqueTags(posts);
+import { SITE } from "src/config"
+
+const platforms = [
+  { name: "hack the box", icon: "/icons/hackthebox.svg" },
+  { name: "vulnhub", icon: "/icons/vulnhub.png" },
+  { name: "try hack me", icon: "/icons/tryhackme.png" },
+  { name: "dockerlabs", icon: "/icons/dockerlabs.png" },
+];
+
+const levels = [ "easy", "medium", "hard", "insane" ]
 ---
 
 <Layout title="ssanjuablog">
-  <Header activeNav="writeups"/>
+  <Header activeNav="writeups" />
   <Main pageTitle="Writeups" pageDesc="Mine.">
     <ul>
-      <li>writeups</li>
+      {
+        platforms.map((platform) => (
+          <Platforms name={platform.name} size="lg">
+             <img class="logo" src={platform.icon} alt={`${platform.name} icon`} />
+          </Platforms>
+        ))
+      }
+    </ul>
+    <ul>
+      {
+        levels.map(level => (
+          <Levels level={level}></Levels>
+        ))
+      }
+    </ul>
+    <ul>
+      <ul>
+        {tags.map((tag) => <Tag name={tag} size="sm" />)}
+      </ul>
     </ul>
   </Main>
   <Footer />
 </Layout>
+
+<style>
+  .logo {
+    @apply w-10
+  }
+</style>

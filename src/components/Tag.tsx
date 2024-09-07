@@ -9,6 +9,7 @@ interface TagProps {
 
 const Tag: React.FC<TagProps> = ({ name, size = "sm" }) => {
   const slug = slugify({ title: name } as Frontmatter);
+
   return (
     <li className={`inline-block mr-2 my-2 ${size === "sm" ? "my-1" : "my-3"}`}>
       <a
