@@ -3,7 +3,7 @@ title: Testing post
 author: ssanjua
 datetime: 2024-07-28T16:55:12.000+00:00
 slug: my-portfolio-and-blog
-featured: true
+featured: false
 tags:
   - NextJS
   - TailwindCSS

@@ -7,6 +7,7 @@ export const SITE = {
   title: "ss4njua hacking blog ssanjua",
   ogImage: "og-default.png",
   postPerPage: 4,
+  lightAndDarkMode: true,
 };
 
 

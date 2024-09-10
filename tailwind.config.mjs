@@ -12,6 +12,9 @@ function withOpacity(variableName) {
 export default {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
+		screens: {
+			sm: "640px",
+		},
 		extend: {
 			textColor: {
 				skin: {
@@ -50,10 +53,10 @@ export default {
 				},
 			},
 			outlineColor: {
-        skin: {
-          fill: withOpacity("--color-accent"),
-        },
-      },
+				skin: {
+					fill: withOpacity("--color-accent"),
+				},
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/typography")],

@@ -22,7 +22,7 @@ const next = pageNum < totalPages ? "" : "disabled";
 
 <Layout title={`Posts | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
+  <Main pageTitle="Posts" pageDesc="All articles.">
     <ul>
       {
         posts.map(({ frontmatter }) => {
@@ -33,36 +33,37 @@ const next = pageNum < totalPages ? "" : "disabled";
       }
     </ul>
   </Main>
-
-  <nav class="pagination-wrapper" aria-label="Pagination">
-    <LinkButton
-      href={`/posts/${pageNum - 1}`}
-      className={`mr-4 select-none ${prev}`}
-      tabindex={prev === "disabled" ? "-1" : "0"}
-      newTab={false}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" class={`${prev}-svg`}>
-        <path
-          d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"
-        ></path>
-      </svg>
-      Prev
-    </LinkButton>
-    <LinkButton
-      href={`/posts/${pageNum + 1}`}
-      tabindex={next === "disabled" ? "-1" : "0"}
-      className={`ml-4 select-none ${next}`}
-      newTab={false}
-    >
-      Next
-      <svg xmlns="http://www.w3.org/2000/svg" class={`${next}-svg`}>
-        <path
-          d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-        ></path>
-      </svg>
-    </LinkButton>
-  </nav>
-  <Footer noMarginTop />
+  {
+    totalPages > 1 && (
+      <nav class="pagination-wrapper" aria-label="Pagination">
+        <LinkButton
+          disabled={prev === "disabled"}
+          href={`/posts${pageNum - 1 !== 1 ? "/" + (pageNum - 1) : ""}`}
+          className={`mr-4 select-none ${prev}`}
+          ariaLabel="Previous"
+          newTab={false}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class={`${prev}-svg`}>
+            <path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z" />
+          </svg>
+          Prev
+        </LinkButton>
+        <LinkButton
+          disabled={next === "disabled"}
+          href={`/posts/${pageNum + 1}`}
+          className={`ml-4 select-none ${next}`}
+          ariaLabel="Next"
+          newTab={false}
+        >
+          Next
+          <svg xmlns="http://www.w3.org/2000/svg" class={`${next}-svg`}>
+            <path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z" />
+          </svg>
+        </LinkButton>
+      </nav>
+    )
+  }
+  <Footer noMarginTop={totalPages > 1} />
 </Layout>
 
 <style>
