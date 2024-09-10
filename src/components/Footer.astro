@@ -1,27 +1,12 @@
 ---
 import HR from "./HR.astro";
-import LinkButton from "./LinkButton.astro";
-import socialIcons from "@assets/socialIcons";
-import { SOCIALS } from "src/config";
+import Socials from "./Socials.astro";
 ---
 
 <footer>
   <HR noPadding />
   <div class="footer-wrapper">
-    <div class="social-icons">
-      {
-         SOCIALS.filter((social) => social.active).map((social) => (
-            <LinkButton
-              href={social.href}
-              className="link-button"
-              title={social.name}
-              ariaLabel={`${social.name} icon`}
-            >
-              <Fragment set:html={socialIcons[social.name]} />
-            </LinkButton>
-          ))
-      }
-    </div>
+    <Socials />
     <div class="copyright-wrapper">
       <span>made with ❤️ by ssanjua</span>
       <span class="separator">&nbsp;|&nbsp;</span>

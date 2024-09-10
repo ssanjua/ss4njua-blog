@@ -5,12 +5,11 @@ import Card from "../components/Card";
 import Footer from "@components/Footer.astro";
 import LinkButton from "../components/LinkButton.astro";
 import HR from "@components/HR.astro";
-import { SOCIALS } from "src/config";
-import socialIcons from "@assets/socialIcons";
 import slugify from "@utils/slugify";
-
 import type { Frontmatter } from "src/types"
 import getSortedPosts from "@utils/getSortedPosts";
+import Socials from "@components/Socials.astro";
+
 const posts = await Astro.glob<Frontmatter>("../contents/*.md");
 
 const sortedPosts = getSortedPosts(posts);
@@ -50,19 +49,7 @@ x;:;;X$&&&&&&&&&&$x;
 			</div>
 			<div class="social-wrapper">
 				<!-- <div class="social-links">Socials:</div> -->
-				<div class="social-icons">
-					{
-            SOCIALS.filter((social) => social.active).map((social) => (
-              <LinkButton
-                href={social.href}
-                className="link-button"
-                title={social.name}
-              >
-                <Fragment set:html={socialIcons[social.name]} />
-              </LinkButton>
-            ))
-					}
-				</div>
+				<Socials />
 			</div>
 		</section>
 		<HR noPadding={false} />
@@ -71,7 +58,7 @@ x;:;;X$&&&&&&&&&&$x;
 			<ul>
 				{
 					posts.map(
-						({ frontmatter }) =>
+					({ frontmatter }: { frontmatter: Frontmatter }) =>
 							frontmatter.featured && (
 								<Card
 									href={`/posts/${slugify(frontmatter)}`}
@@ -117,7 +104,7 @@ x;:;;X$&&&&&&&&&&$x;
 	<Footer />
 </Layout>
 
-<style>
+<style is:global>
 	#hero {
 		@apply pt-8;
 	}
@@ -135,12 +122,6 @@ x;:;;X$&&&&&&&&&&$x;
 	}
 	.social-wrapper {
 		@apply flex justify-start sm:items-center mb-6;
-	}
-	.social-icons {
-		@apply mt-1 sm:ml-2;
-	}
-	.link-button {
-		@apply p-2 sm:p-1;
 	}
 	.link-button svg {
 		@apply scale-100 sm:scale-100;
