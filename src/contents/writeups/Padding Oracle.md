@@ -11,6 +11,7 @@ tags:
 description:
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
 ---
+
 ---
 
 - **Name**: Pentester Lab: Padding Oracle
@@ -32,7 +33,7 @@ Source: [https://pentesterlab.com/exercises/padding_oracle/course](https://pent
 Descargamos el .iso de la web de Vulnhub: [Pading Oracle](https://www.vulnhub.com/entry/pentester-lab-padding-oracle,174)
 Luego inicializamos el .iso con VMware Workstation Pro 17 y configuramos el Network Adapter a **bridge** para que nuestra Maquina virtual Kali Linux se encuentre en la misma red y podamos conectarnos. 
 
-![Descripción](../assets/img-content/paddingOracle(0).png)
+![Descripción](../../assets/img-content/paddingOracle(0).png)
 ## Reconocimiento
 
 Luego de encender la maquina victima y nuestro Kali, tratamos de reconocer la IP de nuestro objetivo con arp-scan.
@@ -41,12 +42,12 @@ Luego de encender la maquina victima y nuestro Kali, tratamos de reconocer la IP
 sudo arp-scan -I eth0 --localnet --ignoredups
 ```
 
-![Descripción](../assets/img-content/paddingOracle(1).png)
+![Descripción](../../assets/img-content/paddingOracle(1).png)
 
 Acá vemos que nuestro target tiene de ip el  ``192.168.0.28.
 Con nuestro target identificado chequeamos si está encendida y operativa con ``ping``.
 
-![Descripción](../assets/img-content/paddingOracle(2).png)
+![Descripción](../../assets/img-content/paddingOracle(2).png)
 
 Vemos en el output que la máquina víctima está encendida y que estamos frente a un sistema **Linux** ya que el ttl es 64, correspondiendo a los sistemas operativos Linux.
 
@@ -56,23 +57,23 @@ Ahora hacemos un escaneo con nmap para ver que servicios está corriendo la máq
 nmap -p- --open -sSV -n -Pn 192.168.0.28
 ```
 
-![Descripción](../assets/img-content/paddingOracle(3).png)
+![Descripción](../../assets/img-content/paddingOracle(3).png)
 
 Identificamos el puerto 80 abierto y corriendo un servicio de **Apache** por lo que abrimos el navegador para ver qué tipo de web tiene montada.
 
 `http://192.168.0.28`
 
-![Descripción](../assets/img-content/paddingOracle(4).png)
+![Descripción](../../assets/img-content/paddingOracle(4).png)
 
 Vemos que hay un Register así que creamos un usuario.
 
-![Descripción](../assets/img-content/paddingOracle(12).png)
+![Descripción](../../assets/img-content/paddingOracle(12).png)
 
-![Descripción](../assets/img-content/paddingOracle(5).png)
+![Descripción](../../assets/img-content/paddingOracle(5).png)
 
 Capturamos la cookie que obtuvimos con nuestro usuario:
 
-![Descripción](../assets/img-content/paddingOracle(6).png)
+![Descripción](../../assets/img-content/paddingOracle(6).png)
 
 Sabemos que la vulnerabilidad que estamos tratando de explotar es **Padding Oracle** por lo que nos apoyaremos en  un script de Perl ([[padbuster]]) que podemos encontrar aquí:  [GitHub repo](https://github.com/AonCyberLabs/PadBuster)
 
@@ -80,14 +81,14 @@ Sabemos que la vulnerabilidad que estamos tratando de explotar es **Padding Orac
 padBuster.pl http://192.168.0.28/index.php <COOKIE> 8 -cookies 'auth=<COOKIE>'
 ```
 
-![Descripción](../assets/img-content/paddingOracle(7).png)
+![Descripción](../../assets/img-content/paddingOracle(7).png)
 
 - `http://192.168.200.132/index.php` : web link.
 - `CBQwdiyx3jioH63e0Fu2PW0nvw2VJx8G`: cookie.
 - `8`: el tamaño del bloque debe ser multiplo de 8    
 - `-cookies 'auth=CBQwdiyx3jioH63e0Fu2PW0nvw2VJx8G`: especificamos el tipo de encripting:  _auth_ cookie.
 
-![Descripción](../assets/img-content/paddingOracle(8).png)
+![Descripción](../../assets/img-content/paddingOracle(8).png)
 
 Como vemos el script nos desencripta la cookie y aparece en texto plano **user=ssanjua**.
 Lo que queremos es poder autenticarnos como el usuario admin, por lo que si hacemos ingeniería inversa y encriptamos **user=admin**? 
@@ -96,15 +97,15 @@ Lo que queremos es poder autenticarnos como el usuario admin, por lo que si hace
 padBuster.pl http://192.168.0.28/index.php <COOKIE> 8 -cookies 'auth=<COOKIE> -plaintext 'user=admin'
 ```
 
-![Descripción](../assets/img-content/paddingOracle(9).png)
+![Descripción](../../assets/img-content/paddingOracle(9).png)
 
-![Descripción](../assets/img-content/paddingOracle(10).png)
+![Descripción](../../assets/img-content/paddingOracle(10).png)
 
 Ahora tenemos el valor **user=admin** encriptado aprovechandonos de la forma en la que **padding** encripta y desencripta los datos.
 
 Si cambiamos en valor el 'navegador' => 'storage' => 'value' por lo que [[padbuster]] nos generó:
 
-![Descripción](../assets/img-content/paddingOracle(11).png)
+![Descripción](../../assets/img-content/paddingOracle(11).png)
 
 Logramos autenticarnos como admin.
 

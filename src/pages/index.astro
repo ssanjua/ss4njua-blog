@@ -10,7 +10,7 @@ import type { Frontmatter } from "src/types"
 import getSortedPosts from "@utils/getSortedPosts";
 import Socials from "@components/Socials.astro";
 
-const posts = await Astro.glob<Frontmatter>("../contents/*.md");
+const posts = await Astro.glob<Frontmatter>("../contents/writeups/*.md");
 
 const sortedPosts = getSortedPosts(posts);
 ---

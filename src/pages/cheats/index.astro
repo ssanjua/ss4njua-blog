@@ -1,16 +1,19 @@
 ---
-import Layout from "@layouts/Layout.astro"
-import Header from "@components/Header.astro"
-import Main from "@layouts/Main.astro";
-import Footer from "@components/Footer.astro";
+import CheatsLayout from "@layouts/CheatsLayout.astro";
+import getPageNumbers from "@utils/getPageNumbers";
+import { SITE } from "src/config";
+import getSortedPosts from "@utils/getSortedPosts";
+import type { Frontmatter } from "src/types";
+
+const cheats = await Astro.glob<Frontmatter>("../../contents/cheatsheets/*.md");
+const sortedPosts = getSortedPosts(cheats);
+
+const totalPages = getPageNumbers(cheats.length);
+const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
 ---
 
-<Layout title="ssanjuablog">
-  <Header activeNav="cheats"/>
-  <Main pageTitle="Cheatseets" pageDesc="Mine.">
-    <ul>
-      <li>cheats</li>
-    </ul>
-  </Main>
-  <Footer />
-</Layout>
+<CheatsLayout
+  posts={paginatedPosts}
+  pageNum={1}
+  totalPages={totalPages.length}
+/>

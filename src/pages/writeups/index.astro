@@ -9,9 +9,8 @@ import getUniqueTags from "@utils/getUniqueTags";
 import type { Frontmatter } from "src/types"
 import Tag from "@components/Tag";
 
-const posts = await Astro.glob<Frontmatter>("../../contents/*.md");
+const posts = await Astro.glob<Frontmatter>("../../contents/writeups/*.md");
 let tags = getUniqueTags(posts);
-import { SITE } from "src/config"
 
 const platforms = [
   { name: "hack the box", icon: "/icons/hackthebox.svg" },

@@ -1,5 +1,4 @@
 ---
-
 import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "src/types"
 import Posts from "@layouts/Posts.astro";
@@ -28,7 +27,7 @@ type PagePaths = {
 }[];
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob<Frontmatter>("../../contents/writeups/*.md");
+  const posts = await Astro.glob<Frontmatter>("../../contents/cheatsheets/*.md");
   let postResult: PostResult = posts.map((post) => {
     return {
       params: {
@@ -49,7 +48,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const { post } = Astro.props;
 
-const posts = await Astro.glob<Frontmatter>("../../contents/writeups/*.md");
+const posts = await Astro.glob<Frontmatter>("../../contents/cheatsheets/*.md");
 const sortedPosts = getSortedPosts(posts);
 const totalPages = getPageNumbers(posts.length);
 const currentPage =

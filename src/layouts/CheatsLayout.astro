@@ -20,14 +20,14 @@ const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < totalPages ? "" : "disabled";
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
-  <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All articles.">
+<Layout title={`Cheatsheets | ${SITE.title}`}>
+  <Header activeNav="cheats" />
+  <Main pageTitle="Cheastsheets" pageDesc="Utils.">
     <ul>
       {
         posts.map(({ frontmatter }) => {
           return (
-            <Card href={`/posts/${slugify(frontmatter)}`} post={frontmatter} />
+            <Card href={`/cheats/${slugify(frontmatter)}`} post={frontmatter} />
           );
         })
       }

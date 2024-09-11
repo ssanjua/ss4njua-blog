@@ -41,7 +41,7 @@ Primero tratamos de reconocer la IP de nuestro objetivo con arp-scan.
 sudo arp-scan -I eth0 --localnet --ignoredups
 ```
 
-![Descripción](../assets/img-content/sickOs(1).png)
+![Descripción](../../assets/img-content/sickOs(1).png)
 
 Nuestro target es el: `192.168.128.132` procedemos a hacer un escaneo nmap para ver que puertos tiene abiertos y descubrimos el puerto **22** y el **3128**.
 
@@ -59,7 +59,7 @@ Datos que extraemos del reconocimiento:
 - Squid-http syn-ack
 - Puertos filtrados
 
-![Descripción](../assets/img-content/sickOs(2).png)
+![Descripción](../../assets/img-content/sickOs(2).png)
 
 Investigamos un poco sobre los **Server Squid**:
 
@@ -69,22 +69,22 @@ Por lo tanto sabemos que lo que esta haciendo el puerto es servir como proxy, po
 
 Intentamos hacer un curl la ip intermediando un proxy por el puerto **3128** que es el puerto abierto atraves de el servidor Squid proxy.
 
-![Descripción](../assets/img-content/sickOs(4).png)
+![Descripción](../../assets/img-content/sickOs(4).png)
 
-![Descripción](../assets/img-content/sickOs(5).png)
+![Descripción](../../assets/img-content/sickOs(5).png)
 
-![Descripción](../assets/img-content/sickOs(6).png)
+![Descripción](../../assets/img-content/sickOs(6).png)
 
 Ahora podemos intentar listar directorios usando el proxy.
 
-![Descripción](../assets/img-content/sickOs(7).png)
+![Descripción](../../assets/img-content/sickOs(7).png)
 
 Al descubrir un directorio **cgi-bin** nos alerta porque sabemos que si existe este es probable que estemos en presencia de una probable **Shell Shock** [ShellShock - CGI](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/cgi)
 
 Vemos si obtenemos algo mas de este dir:
 
-![Descripción](../assets/img-content/sickOs(10).png)
-![Descripción](../assets/img-content/sickOs(9).png)
+![Descripción](../../assets/img-content/sickOs(10).png)
+![Descripción](../../assets/img-content/sickOs(9).png)
 
 Buscamos por la web mas información acerca de los **Shell Shock** y encontramos un viejo articulo [Shell Shock](https://blog.cloudflare.com/inside-shellshock/)
 
@@ -96,7 +96,7 @@ curl -H "User-Agent: () { :; }; /bin/eject" http://example.com/
 
 Lo intentamos cambiando la instruccion, usando solo la cabecera del ejemplo:
 
-![Descripción](../assets/img-content/sickOs(11).png)
+![Descripción](../../assets/img-content/sickOs(11).png)
 
 Efectivamente tenemos ejecución de comando, por lo que vamos a intentar obtener una **Reverse shell** atraves de un script de python:
 
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 
 Ejecutamos mientras escuchamos por el puerto que elegimos en el script:
 
-![Descripción](../assets/img-content/sickOs(22).png)
+![Descripción](../../assets/img-content/sickOs(22).png)
 
 Lo logramos, estamos dentro de la maquina victima y podemos ejecutar comandos, ahora tenemos que escalar nuestro privilegio.
 
@@ -140,11 +140,11 @@ Dentro de este archivo estan las credenciales para autenticarse en la base de da
 - Password: 'john@123'
 
 
-![Descripción](../assets/img-content/sickOs(17).png)
+![Descripción](../../assets/img-content/sickOs(17).png)
 
 La shell es antigua por lo que su googleas el output siguiente te aconsejan actualizar la shell.
 
-![Descripción](../assets/img-content/sickOs(18).png)
+![Descripción](../../assets/img-content/sickOs(18).png)
 
 Actualizamos e intentamos autenticar con las credenciales encontradas:
 
@@ -152,14 +152,14 @@ Actualizamos e intentamos autenticar con las credenciales encontradas:
 python -c 'import pty;pty.spawn("/bin/bash")'
 ```
 
-![Descripción](../assets/img-content/sickOs(19).png)
+![Descripción](../../assets/img-content/sickOs(19).png)
 
 Pues si! Funcionó, lo intentamos de nuevo y... 
 
-![Descripción](../assets/img-content/sickOs(20).png)
+![Descripción](../../assets/img-content/sickOs(20).png)
 
 Ya somos **root**.
 
-![Descripción](../assets/img-content/sickOs(21).png)
+![Descripción](../../assets/img-content/sickOs(21).png)
 
 Flag encontrada!

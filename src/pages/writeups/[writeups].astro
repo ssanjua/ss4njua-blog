@@ -18,7 +18,7 @@ export interface Props {
 
 export async function getStaticPaths() {
   const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
-    "../../contents/*.md"
+    "../../contents/writeups/*.md"
   );
 
   const tags = getUniqueTags(posts);
@@ -39,14 +39,14 @@ const { writeups } = Astro.params;
 const tag = writeups;
 
 const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
-  "../../contents/*.md"
+  "../../contents/writeups/*.md"
 );
 
 const tagPosts = getPostsByTag(posts, tag);
 ---
 
 <Layout title={`${tag} machines | ${SITE.title}`}>
-  <Header activeNav="tags" />
+  <Header activeNav="writeups" />
   <Main
     pageTitle={`Platforms: ${tag}`}
     pageDesc={`Machines solved in "${tag}".`}

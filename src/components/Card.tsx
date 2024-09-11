@@ -31,11 +31,6 @@ export default function Card({ href, post, secHeading = true }: Props) {
           <Tag name={tag} />
         ))}
       </div>
-      {/* <div className={styles.tagsWrapper}>
-        {post.tags.map(tag => (
-          <p className={styles.tagText}>{tag}</p>
-        ))}
-      </div> */}
       <p>{post.description}</p>
     </li>
   );

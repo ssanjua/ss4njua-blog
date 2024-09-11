@@ -6,14 +6,14 @@ import Main from "@layouts/Main.astro";
 import getUniqueTags from "@utils/getUniqueTags";
 import type { Frontmatter } from "src/types"
 import Footer from "@components/Footer.astro";
-const posts = await Astro.glob<Frontmatter>("../../contents/*.md");
+const posts = await Astro.glob<Frontmatter>("../../contents/writeups/*.md");
 let tags = getUniqueTags(posts);
 import { SITE } from "src/config"
 
 ---
 
 <Layout title={`Tags:| ${SITE.title}`}>
-  <Header activeNav="tags" />
+  <Header activeNav="writeups" />
   <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
     <ul>
       {tags.map((tag) => <Tag name={tag} size="sm" />)}

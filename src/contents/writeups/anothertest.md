@@ -12,6 +12,7 @@ tags:
   - Tag22222
   - Taging
   - Hacker
+  - Terminal
 description:
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
 ---
