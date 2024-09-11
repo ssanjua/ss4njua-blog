@@ -10,7 +10,11 @@ import type { Frontmatter } from "src/types"
 import Tag from "@components/Tag";
 
 const posts = await Astro.glob<Frontmatter>("../../contents/writeups/*.md");
-let tags = getUniqueTags(posts);
+const cheats = await Astro.glob<Frontmatter>("../../contents/cheatsheets/*.md")
+let cheatsTags = getUniqueTags(cheats)
+let postsTags = getUniqueTags(posts);
+
+const tags = [...cheatsTags, ...postsTags]
 
 const platforms = [
   { name: "hack the box", icon: "/icons/hackthebox.svg" },

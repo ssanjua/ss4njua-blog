@@ -20,9 +20,15 @@ export async function getStaticPaths() {
   const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
     "../../contents/writeups/*.md"
   );
+  const cheats: MarkdownInstance<Frontmatter>[] = await Astro.glob(
+    "../../contents/cheatsheets/*.md"
+  );
 
-  const tags = getUniqueTags(posts);
+  const postTags = getUniqueTags(posts);
+  const cheatTags = getUniqueTags(cheats)
 
+  const tags = [...new Set([...postTags, ...cheatTags])];
+  
   return tags.map((tag) => {
     return {
       params: {
@@ -40,8 +46,14 @@ const { tag } = Astro.props;
 const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob(
   "../../contents/writeups/*.md"
 );
+const cheats: MarkdownInstance<Frontmatter>[] = await Astro.glob(
+  "../../contents/cheatsheets/*.md"
+)
 
 const tagPosts = getPostsByTag(posts, tag);
+const cheatPost = getPostsByTag(cheats, tag)
+
+const combinedTags = [...tagPosts, ...cheatPost]
 ---
 
 <Layout title={`Tag:${tag} | ${SITE.title}`}>
@@ -52,7 +64,7 @@ const tagPosts = getPostsByTag(posts, tag);
   >
     <ul>
       {
-        tagPosts.map(({ frontmatter }) => (
+        combinedTags.map(({ frontmatter }) => (
           <Card href={`/posts/${slugify(frontmatter)}`} post={frontmatter} />
         ))
       }
