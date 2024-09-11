@@ -5,7 +5,7 @@ export const SITE = {
   author: "ss4njua",
   desc: "writeups and utils for pentesting and ethical hacking, machines and learning cybersecirity.",
   title: "ss4njua hacking blog ssanjua",
-  ogImage: "og-default.png",
+  ogImage: "og-ssanjua.webp",
   postPerPage: 4,
   lightAndDarkMode: true,
 };
