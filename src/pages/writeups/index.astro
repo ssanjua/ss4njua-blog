@@ -8,6 +8,8 @@ import Levels from "@components/Levels";
 import getUniqueTags from "@utils/getUniqueTags";
 import type { Frontmatter } from "src/types"
 import Tag from "@components/Tag";
+import countTagOccurrences from "@utils/countTagOccurrences";
+
 
 const posts = await Astro.glob<Frontmatter>("../../contents/writeups/*.md");
 const cheats = await Astro.glob<Frontmatter>("../../contents/cheatsheets/*.md")
@@ -23,7 +25,18 @@ const platforms = [
   { name: "dockerlabs", icon: "/icons/dockerlabs.png" },
 ];
 
+
+const platformCounts = platforms.map(platform => {
+  const count = countTagOccurrences(posts, platform.name);
+  return { ...platform, count };
+});
+
 const levels = [ "easy", "medium", "hard", "insane" ]
+
+const levelCounts = levels.map(level => {
+  const count = countTagOccurrences(posts, level)
+  return { level, count}
+})
 ---
 
 <Layout title="ssanjuablog">
@@ -31,17 +44,20 @@ const levels = [ "easy", "medium", "hard", "insane" ]
   <Main pageTitle="Writeups" pageDesc="Mine.">
     <ul>
       {
-        platforms.map((platform) => (
-          <Platforms name={platform.name} size="lg">
+        platformCounts.map((platform) => (
+          <Platforms name={platform.name}>
              <img class="logo" src={platform.icon} alt={`${platform.name} icon`} />
+             <span>{platform.count} posts</span>
           </Platforms>
         ))
       }
     </ul>
     <ul>
       {
-        levels.map(level => (
-          <Levels level={level}></Levels>
+        levelCounts.map(level => (
+          <Levels level={level.level}>
+            <span>{level.count} posts</span>
+          </Levels>
         ))
       }
     </ul>
@@ -56,6 +72,6 @@ const levels = [ "easy", "medium", "hard", "insane" ]
 
 <style>
   .logo {
-    @apply w-10
+    @apply w-8
   }
 </style>

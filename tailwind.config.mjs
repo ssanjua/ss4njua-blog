@@ -20,6 +20,7 @@ export default {
 				skin: {
 					base: withOpacity("--color-text-base"),
 					accent: withOpacity("--color-text-accent"),
+					inverted: withOpacity("--color-text-inverted")
 				},
 			},
 			backgroundColor: {
