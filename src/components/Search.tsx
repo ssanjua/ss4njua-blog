@@ -78,7 +78,7 @@ export default function SearchBar({ searchList }: Props) {
         </span>
         <input
           className="placeholder:italic placeholder:text-opacity-75 py-3 pl-10 pr-3 
-        block bg-skin-fill w-full rounded
+        block bg-skin-fill w-full rounded-lg
         border-2 border-skin-accent border-opacity-60 
         focus:outline-none focus:border-skin-accent"
           placeholder="Search for anything..."

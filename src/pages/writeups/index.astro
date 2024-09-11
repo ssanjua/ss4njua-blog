@@ -10,7 +10,6 @@ import type { Frontmatter } from "src/types"
 import Tag from "@components/Tag";
 import countTagOccurrences from "@utils/countTagOccurrences";
 
-
 const posts = await Astro.glob<Frontmatter>("../../contents/writeups/*.md");
 const cheats = await Astro.glob<Frontmatter>("../../contents/cheatsheets/*.md")
 let cheatsTags = getUniqueTags(cheats)
@@ -25,17 +24,22 @@ const platforms = [
   { name: "dockerlabs", icon: "/icons/dockerlabs.png" },
 ];
 
-
 const platformCounts = platforms.map(platform => {
   const count = countTagOccurrences(posts, platform.name);
   return { ...platform, count };
 });
 
-const levels = [ "easy", "medium", "hard", "insane" ]
+const levels = [
+  { name: "easy", icon: "🟢​" },
+  { name: "medium", icon: "🟢​🟡" },
+  { name: "hard", icon: "🟢​🟡​🟠" },
+  { name: "insane", icon: "🟢​🟡​🟠​🔴" }
+]
+
 
 const levelCounts = levels.map(level => {
-  const count = countTagOccurrences(posts, level)
-  return { level, count}
+  const count = countTagOccurrences(posts, level.name)
+  return { ...level, count}
 })
 ---
 
@@ -45,9 +49,8 @@ const levelCounts = levels.map(level => {
     <ul>
       {
         platformCounts.map((platform) => (
-          <Platforms name={platform.name}>
+          <Platforms name={platform.name} count={platform.count}>
              <img class="logo" src={platform.icon} alt={`${platform.name} icon`} />
-             <span>{platform.count} posts</span>
           </Platforms>
         ))
       }
@@ -55,8 +58,7 @@ const levelCounts = levels.map(level => {
     <ul>
       {
         levelCounts.map(level => (
-          <Levels level={level.level}>
-            <span>{level.count} posts</span>
+          <Levels level={level.name} icon={level.icon} count={level.count}>
           </Levels>
         ))
       }
@@ -72,6 +74,6 @@ const levelCounts = levels.map(level => {
 
 <style>
   .logo {
-    @apply w-8
+    @apply w-8 p-1
   }
 </style>
