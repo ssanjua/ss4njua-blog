@@ -88,3 +88,17 @@ const { title, author, description, ogImage, datetime, tags } = frontmatter;
     @apply  italic;
   }
 </style>
+
+<script is:inline>
+
+function backToTop() {
+    document.querySelector("#back-to-top")?.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+  backToTop();
+
+</script>

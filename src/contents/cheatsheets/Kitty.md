@@ -1,7 +1,7 @@
 ---
 title: Kitty Shortcuts for Linux
 author: ssanjua
-datetime: 2024-09-28T16:55:12.000+00:00
+datetime: 2024-09-06T09:25:12.000+00:00
 slug: Kitty-terminal
 featured: true
 tags:

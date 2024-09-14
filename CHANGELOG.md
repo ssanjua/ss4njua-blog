@@ -6,3 +6,4 @@
 
 - Fully responsive & accessible
 - Pagination & draft post
+- Dark and Light theme

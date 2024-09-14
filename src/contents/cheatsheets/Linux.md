@@ -1,7 +1,7 @@
 ---
 title: Linux Basic Terminal Commands
 author: ssanjua
-datetime: 2024-09-12T16:55:12.000+00:00
+datetime: 2024-09-12T13:43:12.000+00:00
 slug: Linux basic terminal commands
 featured: false
 tags:
