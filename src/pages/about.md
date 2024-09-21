@@ -17,4 +17,4 @@ If you’d like to get in touch, feel free to contact me via email or through my
 
 Thank you for visiting my blog! I hope you find the information I share about cybersecurity useful.
 
-![ssanjua](./public/oG-ss4njua.webp)
+![ss4njua](../../public/oG-ss4njua.webp)
