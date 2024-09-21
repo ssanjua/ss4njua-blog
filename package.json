@@ -26,5 +26,8 @@
     "remark-toc": "^9.0.0",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/github-slugger": "^2.0.0"
   }
 }
