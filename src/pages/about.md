@@ -3,29 +3,18 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-Hi! I'm Paula, also known as ssanjua. Passionate about technology and committed to creating products that make a difference, my experience in the multimedia sector has shaped me in leadership and collaborative work. Specialized in technologies such as JavaScript, React, Node.js, and SQL/NoSQL databases, my projects include applications like Bookeando and YarcoDelivery, covering both backend and frontend. My colleagues highlight my technical skills as well as my creative thinking and problem-solving abilities.
+# About Me
 
-# something
+Hello! I'm Paula, a **Full Stack Developer** who is passionate about cybersecurity. In my free time, I'm learning about this fascinating field and solving machines on various platforms. You can check out my projects on my [portfolio](https://ssanjua.vercel.app) and follow my journey on [Linktree](https://ss-link.vercel.app/) and also my Portfolio terminal [portfolio](https://ssanjuaterminal.vercel.app).
 
-+ hello
+I firmly believe that all IT professionals should learn more about cybersecurity. The **Introduction to Hacking** course from Hack4u opened my eyes and is helping me think about web development securely.
 
-Now I'm going to show you an example of an unordered list to make sure that looks good, too:
+If you’d like to get in touch, feel free to contact me via email or through my social media:
 
-- So here is the first item in this list.
-- In this example we're keeping the items short.
-- Later, we'll use longer, more complex list items.
+- [GitHub](https://github.com/ssanjua)
+- [LinkedIn](https://www.linkedin.com/in/paupallares/)
+- [Email](mailto:ppaupallares@gmail.com)
 
-I think most people are going to use [highlight.js](https://highlightjs.org/) or [Prism](https://prismjs.com/) or something if they want to style their code blocks but it wouldn't hurt to make them look _okay_ out of the box, even with no syntax highlighting.
+Thank you for visiting my blog! I hope you find the information I share about cybersecurity useful.
 
-Here's what a default `tailwind.config.js` file looks like at the time of writing:
-
-```js
-module.exports = {
-  purge: [],
-  theme: {
-    extend: {},
-  },
-  variants: {},
-  plugins: [],
-};
-```
+![ssanjua](./public/oG-ss4njua.webp)

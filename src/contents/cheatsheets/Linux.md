@@ -8,7 +8,7 @@ tags:
   - Linux
   - Cheatsheets
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
+  Linux basic command lines for new Linux geeks.
 ---
 ---
 

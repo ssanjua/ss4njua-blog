@@ -6,12 +6,10 @@ slug: Oracle Machine - Vulnhub
 featured: true
 tags:
   - Vulnhub
-  - Hacker
+  - Padding Oracle
   - Easy
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
----
-
+  This VM, provided by Pentester Lab, has a website vulnerable to padding oracle attack. Our goal is to exploit this vulnerability and login as admin.
 ---
 
 - **Name**: Pentester Lab: Padding Oracle

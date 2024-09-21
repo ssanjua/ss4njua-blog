@@ -1,7 +1,7 @@
 ---
 title: Vim shortcuts 
 author: ssanjua
-datetime: 2024-09-15T16:55:12.000+00:00
+datetime: 2024-09-21T16:55:12.000+00:00
 slug: Vim shortcuts cheatsheet
 featured: false
 tags:
@@ -9,7 +9,7 @@ tags:
   - Cheatsheets
   - Vim
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
+  Vim was the worst when I started, now I love it but I survived because of this cheatsheet.
 ---
 ---
 ### Global

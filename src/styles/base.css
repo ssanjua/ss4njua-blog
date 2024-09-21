@@ -46,8 +46,8 @@
   }
   .prose {
     @apply prose-a:underline-offset-8 prose-ul:overflow-x-clip 
-    prose-a:!decoration-dashed hover:prose-a:text-skin-accent 
-    prose-img:mx-auto prose-img:border-2 prose-img:border-skin-line
+    prose-a:hover:prose-a:text-skin-accent 
+    prose-img:mx-auto prose-img:rounded
     prose-img:!mt-2 prose-headings:!mb-3
     prose-th:border prose-th:border-skin-line
     prose-td:border prose-td:border-skin-line
@@ -61,7 +61,7 @@
     prose-strong:!text-skin-base prose-table:text-skin-base 
     prose-pre:!text-skin-base prose-a:!text-skin-base 
     prose-hr:!border-skin-line prose-li:marker:!text-skin-accent 
-    prose-blockquote:!border-l-skin-accent prose-blockquote:border-opacity-50;
+    prose-blockquote:!border-l-skin-accent prose-blockquote:border-opacity-50 ;
   }
   .theme-dark .prose {
     @apply prose-invert;

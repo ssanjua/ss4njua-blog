@@ -8,8 +8,9 @@ tags:
   - Terminal
   - Bash
   - Cheatsheets
+  - Linux
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
+  Shortcuts and commands for basic bash.
 ---
 ---
 

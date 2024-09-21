@@ -1,16 +1,15 @@
 ---
 title: My Expenses 1
 author: ssanjua
-datetime: 2024-09-07T16:55:12.000+00:00
+datetime: 2024-09-20T16:55:12.000+00:00
 slug: My Expenses 1 - Vulnhub
 featured: true
 tags:
   - Vulnhub
-  - Hacker
-  - Easy
-  - Hack the box
+  - Hacking web
+  - Medium
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
+  MyExpense is a deliberately vulnerable web application that allows you to train in detecting and exploiting different web vulnerabilities. MyExpense contains a set of vulnerabilities you need to exploit to achieve the whole scenario.
 ---
 ---
 - **Name**: MyExpense: 1

@@ -9,7 +9,7 @@ tags:
   - Linux
   - Cheatsheets
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
+  Shortcuts to survive Kitty when you are a newbie.
 ---
 ---
 

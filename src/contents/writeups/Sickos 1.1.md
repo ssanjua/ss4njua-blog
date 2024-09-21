@@ -6,11 +6,10 @@ slug: SickOS 1 - Vulnhub
 featured: true
 tags:
   - Vulnhub
-  - Hacker
-  - Easy
-  - Hack the box
+  - Privilege-scalation
+  - Medium
 description:
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.
+  This is a Linux box that involved exploiting the PUT http method to upload a PHP script through which a reverse shell can be obtained, and then using a known vulnerability in the chkrootkit program to escalate to root.
 ---
 
 - **Name**: SickOs: 1.1
