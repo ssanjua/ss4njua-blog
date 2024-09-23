@@ -19,57 +19,72 @@ description:
 - **Author**: [Ryan Oberto](https://www.vulnhub.com/author/ryan-oberto,474/)
 - **Series**: [pluck](https://www.vulnhub.com/series/pluck,109/)
 
-nmap
 
-puerto 80 vemos la web
+## Recognition
 
-vemos en la url el ?page=php apunta a distintos archivos php
-jugamos con wrappers y vemos que es vulnerable y vemos comandos
+After turning on the victim machine and our Kali, we try to recognize the IP of our target with arp-scan.
 
-curiosear el base64 y naa
+```bash
+sudo arp-scan -I eth0 --localnet --ignoredups
+```
 
-cuano vemos el passwd vemos el backup user y curioseamos por la cara el scrpt de bash
+We see in the output that the victim machine is on and that we are in front of a **Linux** system since the ttl is 64, corresponding to Linux operating systems.
 
-tratamos de obtener via tfcp el backup.tar 
-descomprimimos y vemos la keys de paul publcias y privadas e ssh
+Now we do a scan with nmap to see what services the victim machine is running.
 
-vemos las claves privadas y publicas e intentamos entrar como paul por ssh
-
-la clave privaa no nos deberia peir contrasena, entontramos que la 4 no nos la pide
-
-vemos que paul tiene asignado este pdmenu
-
-vemos que edit nos da la capacidad de ejecutar un vim y buscamos en gfibins como explotar la vi y encontramos 
-:set shell=/bin/bash 
-:shell
- ejecutamos y estamos dentro como paul
-
-buscamos escalar nuestro privilegio ahora
-buscamos en searsploit buscando la explotacion de binarios 4000
-
-buscamos que es exim
-
-bajamos el exploit de escalado de privilegios
-
-lo ejecutamos y chan
+```bash
+nmap -p- --open -sSV -n -Pn 192.168.128.137
+```
 
 ![Descripción](../../assets/img-content/pluck(12).png)
 
+Port 80 OPEN, lets check the website:
+
 ![Descripción](../../assets/img-content/pluck(1).png)
+
+we see in the url the ?page=php points to different php files
+we play with wrappers and we see that it is vulnerable and we see commands
 
 ![Descripción](../../assets/img-content/pluck(11).png)
 ![Descripción](../../assets/img-content/pluck(10).png)
+
+when we see the passwd we see the backup user and look at the bash script
+
+we try to get via tfcp the backup.tar 
+
 ![Descripción](../../assets/img-content/pluck(9).png)
+
+we unzip and see the paul public and private keys and ssh
+
 ![Descripción](../../assets/img-content/pluck(8).png)
+
+we see the private and public keys and try to login as paul via ssh
+
+the private key should not ask for a password, so we find that 4 does not ask for it.
+
+we see that paul is assigned this pdmenu
+
 ![Descripción](../../assets/img-content/pluck(7).png)
-![Descripción](../../assets/img-content/pluck(6).png)
+
+we see that edit gives us the ability to run a vim and we look in gfibins for how to exploit the vi and we find 
+:set shell=/bin/bash 
+:shell
+ we execute and we are inside as paul
+
+ ![Descripción](../../assets/img-content/pluck(6).png)
+
+we look for scaling our privilege now
+we search in searsploit looking for the 4000 binary exploit
+
 ![Descripción](../../assets/img-content/pluck(5).png)
 ![Descripción](../../assets/img-content/pluck(6).png)
-![Descripción](../../assets/img-content/pluck(5).png)
-![Descripción](../../assets/img-content/pluck(4).png)
-![Descripción](../../assets/img-content/pluck(3).png)
+
+search for exim
+
+we download the privilege escalation exploit
+
+![Description](../../assets/img-content/pluck(3).png)
+
+we execute it and chan
 
 ![Descripción](../../assets/img-content/pluck(2).png)
-
-
-

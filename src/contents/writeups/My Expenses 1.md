@@ -34,9 +34,9 @@ Your credentials were: samuel/fzghn4lw
 Once the challenge is done, the flag will be displayed on the application while being connected with your (samuel) account.
 
 ----
-## Reconocimiento
+## Recognition
 
-Primero tratamos de reconocer la IP de nuestro objetivo con arp-scan.
+First we try to recognize the IP of our target with arp-scan.
 
 ```bash
 sudo arp-scan -I eth0 --localnet --ignoredups
@@ -44,22 +44,22 @@ sudo arp-scan -I eth0 --localnet --ignoredups
 
 ![Descripción](../../assets/img-content/myExpense(29).png)
 
-Acá vemos que nuestro target tiene de ip el  ``192.168.0.24``.
-Con nuestro target identificado chequeamos si está encendida y operativa.
+Here we see that our target's ip is ``192.168.0.24``.
+With our target identified we check if it is on and operational.
 
 ```bash
 ping <IP_VICTIMA>
 ```
 
-Vemos en el output que la máquina víctima está encendida y que estamos frente a un sistema **Linux** ya que el ttl es 64, correspondiendo a los sistemas operativos Linux.
+We can see in the output that the victim machine is on and that we are dealing with a **Linux** system since the ttl is 64, corresponding to Linux operating systems.
 
 ![myExpense](../../assets/img-content/myExpense(1).png)
 
-Colocamos la IP en el navegador para ver con que estamos tratando
+We place the IP in the browser to see what we are dealing with
 
 ![myExpense](../../assets/img-content/myExpense(2).png)
 
-Ahora hacemos un escaneo con nmap para ver que servicios está corriendo la máquina víctima.
+Now we do an nmap scan to see what services the victim machine is running.
 
 ```bash
 nmap -p- --open -sS -vvv -Pn <IP_VICTIMA> -oG allPorts
@@ -67,29 +67,29 @@ nmap -p- --open -sS -vvv -Pn <IP_VICTIMA> -oG allPorts
 
 ![myExpense](../../assets/img-content/myExpense(3).png)
 
-El reconocimiento de puertos nos da un dato importante en el archivo `robots.txt`  contenía una entrada que deshabilitaba el acceso a `/admin/admin.php`.
+Port recognition gives us an important piece of information in the `robots.txt` file contained an entry disabling access to `/admin/admin.php`.
 
-El archivo `robots.txt` suele contener directivas que especifican rutas o archivos que no deberían ser rastreados por los robots.
+The `robots.txt` file usually contains directives that specify paths or files that should not be crawled by robots.
 
-Probamos en el navegador la ruta http:<IP_VICTIMA>/admin/admin.php y descubrimos un panel de administración donde vemos a nuestro samuel inactivo y a el resto de usuarios de la empresa.
+We tried in the browser the path http:<IP_VICTIMA>/admin/admin.php and discovered an administration panel where we see our inactive samuel and the rest of the users of the company.
 
 ![myExpense](../../assets/img-content/myExpense(4).png)
 
-Ahora tenemos el nombre de usuario de samuel y podemos ingresar a su cuenta ya que tenemos sus credenciales
+Now we have samuel's username and we can login to his account since we have his credentials
 
 ![myExpense](../../assets/img-content/myExpense(5).png)
 
-Las credenciales son correctas pero el usuario está inhabilitado por lo que no podemos continuar ese camino. 
+The credentials are correct but the user is disabled so we can't continue that way. 
 
 ## Idea
 
-Necesitamos poder activar el usuario de Samuel, por lo que necesitamos un usuario privilegiado para poder activarlo. Si hacemos click en el botón de 'Inactivo' podemos ver la query con la que aparentemente se podría cambiar el estado a 'Activo'.
+We need to be able to activate Samuel's user, so we need a privileged user to be able to activate it. If we click on the 'Inactive' button we can see the query with which apparently we could change the status to 'Active'.
 
 ![myExpense](../../assets/img-content/myExpense(6).png)
 
-Vamos a intentar crear un usuario y ver si el sitio es propenso la vulnerabilidad **XXS** [[(Cross-Site Scripting)]]
+Let's try to create a user and see if the site is prone to the **XXS** [[(Cross-Site Scripting)]] vulnerability.
 
-Creamos un usuario con un pequeno script de JavaScript.
+We create a user with a small JavaScript script.
 
 ```js
 <script>alert("injection")</script>
@@ -97,72 +97,72 @@ Creamos un usuario con un pequeno script de JavaScript.
 
 ![myExpense](../../assets/img-content/myExpense(8).png)
 
-Como podemos ver en la imagen arriba el botón 'Sign up!' está bloqueado, pero con borrar a través de la consola del navegador la instrucción ``disabled`` el botón queda habilitado y podemos crear el usuario.
+As we can see in the image above the ``Sign up!'' button is blocked, but by deleting the ``disabled`` instruction through the browser console the button is enabled and we can create the user.
 
-Volvemos a ``http:192.168.0.24/admin/admin.php`` y comprobamos que efectivamente hemos vulnerado la web. 
+We return to ``http:192.168.0.24/admin/admin.php`` and we verify that we have indeed violated the web. 
 
 ### Cookie Hjacking
 
-El próximo paso que intentamos es intentar activar la cuenta de Samuel apropiándonos de la **cookie** de un usuario privilegiado o administrados. Intentaremos hacer un [[Cookie Hijacking]].
+The next step we try is to try to activate Samuel's account by appropriating the **cookie** of a privileged or managed user. We will try [[Cookie Hijacking]].
 
-Creamos un pequeño script en **JavaScript** donde mediante ponernos en escucha por el puerto 80 con un servidor de **Python**. La hipótesis es que el usuario administrador debe estar ejecutando y controlando el servicio en el panel ``admin.php`` por lo que podemos robarle la cookie de sesión para poder activar nuevamente la cuenta de Samuel. 
+We create a small script in **JavaScript** where by listening on port 80 with a **Python** server. The hypothesis is that the administrator user must be running and controlling the service in the ``admin.php`` panel so we can steal the session cookie to be able to activate the Samuel account again. 
 
 ![myExpense](../../assets/img-content/myExpense(9).png)
 
 ![myExpense](../../assets/img-content/myExpense(10).png)
 
-Cambiamos en el navegador la cookie actual por la que recuperamos en el servidor python y veremos que una de ella equivale al usuario administrador.
+We change in the browser the current cookie for the one we retrieved in the python server and we will see that one of them is equivalent to the administrator user.
 
 ![myExpense](../../assets/img-content/myExpense(11).png)
 
-Pero lamentablemente no se permite la sesión simultanea de este usuario administrador, por lo que no tenemos permisos para ver lo que sucede en la pagina pero si podemos enviar solicitudes ya que estamos autenticados como el usuario administrador al haber robado su cookie. Por lo que podemos crear o modificar el script para que haga la petición que queremos: que el usuario slamotte esté activo.
+But unfortunately the simultaneous session of this administrator user is not allowed, so we do not have permissions to see what happens on the page but we can send requests since we are authenticated as the administrator user having stolen his cookie. So we can create or modify the script to make the request we want: that the user slamotte is active.
 
 ![myExpense](../../assets/img-content/myExpense(12).png)
 
-Enviamos este nuevo script como XSS nuevamente y esperamos unos segundos y volvemos a chequear el panel ``admin/admin.php`` con la cookie de un usuario que no sea el administrador.
+We send this new script as XSS again and wait a few seconds and recheck the ``admin/admin.php`` panel with the cookie of a user other than the administrator.
 
 ![myExpense](../../assets/img-content/myExpense(13).png)
 
-Ahora slamotte está activo por lo que ya teniendo sus credenciales podemos loguearnos con su cuenta para intentar pasar los gastos. 
+Now slamotte is active so having his credentials we can log in with his account to try to pass the expenses. 
 
 ```bash
 user: slamotte
 password: fzghn4lw
 ```
 
-Efectivamente ahora podemos loguearnos ya que su cuenta está activa y enviamos el reporte de los gastos. 
+Effectively now we can log in since your account is active and send the expense report. 
 
 ![myExpense](../../assets/img-content/myExpense(14).png)
 
-Ahora tenemos que validar el gasto, la info que obtenemos de los chats que se pueden ver en el perfil de Samuel indican que su superior es **Manon Riviere** por lo que tenemos que hacernos con su credencial para poder aprobar el gasto. 
+Now we have to validate the expense, the info we get from the chats that can be seen in Samuel's profile indicate that his superior is **Manon Riviere** so we have to get his credential to be able to approve the expense. 
 
-En el perfil de Samuel se pueden enviar mensajes por lo que si el publica un mensaje podríamos intentar robarnos la cookie de los usuario que estén autenticados. Vamos a intentarlo inyectando el script de JavaScript para robarnos la cookie en el cuerpo del mensaje.
-Ahora chequeamos en nuestro servidor de Python si el script nos devuelve algo interesante.
+In Samuel's profile you can send messages so if he publishes a message we could try to steal the cookie of the authenticated users. We are going to try this by injecting the JavaScript script to steal the cookie in the body of the message.
+Now we check on our Python server if the script returns something interesting.
 
 ![myExpense](../../assets/img-content/myExpense(17).png)
 
-Podemos ver varias **cookies** probablemente de todos los empleados que reciben el mensaje. Probamos cambiar en el navegador todas hasta que encontramos la de nuestro manager.
+We can see several **cookies** probably from all the employees who receive the message. We try to change all of them in the browser until we find the one of our manager.
 
 ![myExpense](../../assets/img-content/myExpense(18).png)
 
-Una vez dentro aprobamos el pago.
+Once inside we approve the payment.
 
 ![myExpense](../../assets/img-content/myExpense(19).png)
 
-Nos encontramos con que hay una persona mas que debe aprobarlo para que llegue a Samuel. 
+We find that there is one more person who must approve it for it to reach Samuel. 
 
 ![myExpense](../../assets/img-content/myExpense(20).png)
 
-Su superior Paul Baudoin es el encargado de aprobar las operaciones financieras, por lo que tenemos que hacernos con su credencial ahora para poder aprobar finalmente el gasto.
+His superior Paul Baudoin is in charge of approving financial transactions, so we need to get hold of his credentials now so we can finally approve the expense.
 
 ### SQLI
 
-Vamos a crear una [[SQLI]] (SQL injection) de forma manual. 
-Primero intentamos ver si existe la vulnerabilidad en la pagina del usuario Manon Riviere.
+We are going to create a [[SQLI]] (SQL injection) manually. 
+First we try to see if the vulnerability exists on the page of the user Manon Riviere.
 
 ![myExpense](../../assets/img-content/myExpense(21).png)
 
-Probamos la siguiente consulta SQL y efectivamente nos devuelve informacion interesante, el usuario de la base de datos.
+We try the following SQL query and it does indeed return interesting information, the database user.
 
 ```sql
 192.168.0.24/site.php?id = 2 union select 1,user()--
